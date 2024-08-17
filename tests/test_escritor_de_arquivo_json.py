@@ -8,7 +8,10 @@ class TestEscritorDeArquivoJson(unittest.TestCase):
     def test_escrever_arquivo_json(self):
         mensagens = [
             Mensagem("chave1", "valor1"),
-            Mensagem("chave2", "valor2")
+            Mensagem("chave2", "valor2"),
+            Mensagem("nivel1.nivel2.chave3", "valor3"),
+            Mensagem("nivel1.nivel2.chave4", "valor4"),
+            Mensagem("nivel1.nivel3.chave5", "valor5")
         ]
         
         escritor = EscritorDeArquivoJson()
@@ -19,9 +22,18 @@ class TestEscritorDeArquivoJson(unittest.TestCase):
         with open(temp_file.name, 'r') as file:
             conteudo = json.load(file)
         
-        self.assertEqual(len(conteudo), 2)
+        # Verificações para as chaves simples
+        self.assertEqual(len(conteudo), 3)  # "chave1", "chave2", "nivel1"
         self.assertEqual(conteudo["chave1"], "valor1")
         self.assertEqual(conteudo["chave2"], "valor2")
+
+        # Verificações para as chaves aninhadas
+        self.assertIn("nivel1", conteudo)
+        self.assertIn("nivel2", conteudo["nivel1"])
+        self.assertIn("nivel3", conteudo["nivel1"])
+        self.assertEqual(conteudo["nivel1"]["nivel2"]["chave3"], "valor3")
+        self.assertEqual(conteudo["nivel1"]["nivel2"]["chave4"], "valor4")
+        self.assertEqual(conteudo["nivel1"]["nivel3"]["chave5"], "valor5")
 
 if __name__ == '__main__':
     unittest.main()
