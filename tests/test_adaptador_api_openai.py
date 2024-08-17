@@ -1,10 +1,10 @@
 import unittest
 from unittest.mock import patch, Mock
-from src.adaptadores.adaptador_api_traducao import AdaptadorApiOpenAI
+from src.adaptadores.adaptador_openai_traducao import AdaptadorApiOpenAI
 from src.entidades.mensagem import Mensagem
 
 class TestAdaptadorApiOpenAI(unittest.TestCase):
-    @patch('src.adaptadores.adaptador_api_traducao.requests.post')
+    @patch('src.adaptadores.adaptador_openai_traducao.requests.post')
     def test_traduzir(self, mock_post):
         # Configurar o mock para simular uma resposta bem-sucedida da API
         mock_response = Mock()
@@ -22,7 +22,7 @@ class TestAdaptadorApiOpenAI(unittest.TestCase):
         self.assertEqual(resultado[0].chave, "chave1")
         self.assertEqual(resultado[0].valor, "Translated text")
 
-    @patch('src.adaptadores.adaptador_api_traducao.requests.post')
+    @patch('src.adaptadores.adaptador_openai_traducao.requests.post')
     def test_traduzir_erro(self, mock_post):
         # Configurar o mock para simular uma resposta de erro da API
         mock_response = Mock()

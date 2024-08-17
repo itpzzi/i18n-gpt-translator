@@ -1,13 +1,14 @@
 import os
-from src.adaptadores.leitor_de_arquivo_json import LeitorDeArquivoJson
+
 from src.adaptadores.escritor_de_arquivo_json import EscritorDeArquivoJson
 from src.adaptadores.adaptador_openai_traducao import AdaptadorApiOpenAI
+from src.adaptadores.leitor_de_arquivo_json import LeitorDeArquivoJson
 from src.casos_de_uso.traduzir_mensagens import TraduzirMensagens
 
 def main():
-    arquivo_entrada = 'caminho/para/entrada.json'
-    diretorio_saida = 'caminho/para/diretorio/saida'
-    idiomas_alvo = ['en', 'es', 'fr']  # Adicione mais idiomas conforme necessário
+    arquivo_entrada = 'entrada/pt-br.i18n.json'
+    diretorio_saida = 'saida'
+    idiomas_alvo = ['en', 'de']  # Adicione mais idiomas conforme necessário
 
     leitor_de_arquivo = LeitorDeArquivoJson()
     escritor_de_arquivo = EscritorDeArquivoJson()

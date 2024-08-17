@@ -1,8 +1,13 @@
+import os
 import requests
 from typing import List
+
 from src.interfaces.tradutor import Tradutor
 from src.entidades.mensagem import Mensagem
-from config import OPENAI_API_KEY, OPENAI_API_URL, MODELO_GPT
+
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+OPENAI_API_URL = os.getenv('OPENAI_API_URL')
+MODELO_GPT = os.getenv('MODELO_GPT')
 
 class AdaptadorApiOpenAI(Tradutor):
     def traduzir(self, mensagens: List[Mensagem], idioma_alvo: str) -> List[Mensagem]:
