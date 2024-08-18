@@ -1,16 +1,15 @@
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import Dict, List
+
 
 @dataclass
-class SolicitacaoTraducao:
+class SolicitacaoTraducaoGoogle:
     idioma_origem: str
     idiomas_destino: List[str]
     conteudo: Dict[str, any]
 
-from dataclasses import dataclass
-from typing import Dict, List
 
 @dataclass
-class ResultadoTraducao:
+class ResultadoTraducaoGoogle:
     traducoes: Dict[str, Dict[str, any]]
-    chaves_vue: List[str]
+    chaves_i18n: List[str]

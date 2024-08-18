@@ -18,7 +18,7 @@ projeto/
 │       └── traducoes.zip
 |           ├── fr.json
 |           ├── en.json
-|           └── chaves_vue.txt
+|           └── chaves_i18n.txt
 ├── .gitignore
 └── README.md
 ```
