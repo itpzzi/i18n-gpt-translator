@@ -80,8 +80,6 @@ pytest_output.txt
 # Arquivos específicos do seu projeto (adicione conforme necessário)
 # exemplo: output/
 # exemplo: data/
-entrada
-saida
 
 # Arquivos de dependências
 pip-log.txt
@@ -99,3 +97,6 @@ docs/_build/
 # IPython
 profile_default/
 ipython_config.py
+
+# Arquivos front
+node_modules

@@ -1,0 +1,29 @@
+{
+  "saudacao": {
+    "manha": "Bom dia",
+    "tarde": "Boa tarde",
+    "noite": "Boa noite"
+  },
+  "despedida": {
+    "formal": "Até logo",
+    "informal": "Tchau"
+  },
+  "menu": {
+    "inicio": "Página Inicial",
+    "sobre": "Sobre Nós",
+    "contato": "Entre em Contato",
+    "produtos": {
+      "titulo": "Nossos Produtos"
+    }
+  },
+  "botoes": {
+    "enviar": "Enviar",
+    "cancelar": "Cancelar",
+    "salvar": "Salvar Alterações"
+  },
+  "mensagens": {
+    "bemVindo": "Bem-vindo ao nosso site!",
+    "erro": "Ocorreu um erro. Tente novamente mais tarde.",
+    "sucesso": "Operação realizada com sucesso!"
+  }
+}
