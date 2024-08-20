@@ -35,7 +35,7 @@ async def traduzir(
     entrada = EntradaTraduzirConteudo(solicitacao_traducao)
     saida = servico.executar(entrada)
 
-    buffer_zip = GeradorZip.gerar_zip(saida.resultado.traducoes, saida.resultado.chaves_i18n)
+    buffer_zip = GeradorZip.executar(saida.resultado.traducoes, saida.resultado.chaves_i18n)
 
     return StreamingResponse(
         buffer_zip,

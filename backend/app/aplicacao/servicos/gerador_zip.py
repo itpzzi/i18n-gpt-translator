@@ -6,7 +6,7 @@ from typing import Dict, List
 
 class GeradorZip:
     @staticmethod
-    def gerar_zip(
+    def executar(
         traducoes: Dict[str, Dict[str, any]], chaves_i18n: List[str]
     ) -> io.BytesIO:
         buffer_zip = io.BytesIO()
