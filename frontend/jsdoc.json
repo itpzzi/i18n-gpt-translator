@@ -1,0 +1,18 @@
+{
+    "source": {
+      "include": ["src"],
+      "exclude": ["node_modules", "build"],
+      "includePattern": ".+\\.tsx?$"
+    },
+    "opts": {
+      "destination": "./documentacao",
+      "recurse": true,
+      "verbose": true
+    },
+    "plugins": ["plugins/markdown"],
+    "templates": {
+      "systemName": "i18n GPT Translator",
+      "theme": "flatly"
+    }
+  }
+  

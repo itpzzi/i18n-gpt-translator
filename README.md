@@ -13,8 +13,6 @@ projeto/
 │   ├── entrada/
 │   │   └── pt-br.i18n.json
 │   └── saida/
-│       ├── exemplo_en.json
-│       ├── exemplo_es.json
 │       └── traducoes.zip
 |           ├── fr.json
 |           ├── en.json

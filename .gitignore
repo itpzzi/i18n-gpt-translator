@@ -86,7 +86,7 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Arquivos de documentação
-docs/_build/
+documentacao/_build/
 
 # Arquivos de perfil de desempenho do Python
 *.prof

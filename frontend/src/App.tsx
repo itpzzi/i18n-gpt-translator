@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import EnvioArquivo from './componentes/EnvioArquivo';
 import SeletorIdioma from './componentes/SeletorIdioma';
 import EntradaGlossario from './componentes/EntradaGlossario';
-import { traduzirArquivoGoogle, traduzirArquivoOpenAI } from './servicos/api';
+import useTraducao from './hooks/useTraducao';
+import { TraducaoServicos } from './types';
 
 const IDIOMAS = [
   { codigo: 'en', nome: 'Inglês' },
@@ -12,29 +13,21 @@ const IDIOMAS = [
   { codigo: 'it', nome: 'Italiano' },
 ];
 
-function App() {
-  const [arquivo, setArquivo] = useState(null);
-  const [idiomaOrigem, setIdiomaOrigem] = useState('pt');
-  const [idiomasDestino, setIdiomasDestino] = useState([]);
-  const [servicoTraducao, setServicoTraducao] = useState('google');
-  const [glossario, setGlossario] = useState({});
+const App: React.FC = () => {
+  const [arquivo, setArquivo] = useState<File | null>(null);
+  const [idiomaOrigem, setIdiomaOrigem] = useState<string>('pt');
+  const [idiomasDestino, setIdiomasDestino] = useState<string[]>([]);
+  const [servicoTraducao, setServicoTraducao] = useState<'google' | 'openai'>('google');
+  const [glossario, setGlossario] = useState<Record<string, string>>({});
+  const { traduzirArquivo, carregando, erro } = useTraducao();
 
-  const lidarComTraduzir = async () => {
+  const lidarComTraduzir = () => {
     if (!arquivo || idiomasDestino.length === 0) {
       alert('Por favor, selecione um arquivo e pelo menos um idioma de destino.');
       return;
     }
 
-    try {
-      if (servicoTraducao === 'google') {
-        await traduzirArquivoGoogle(arquivo, idiomaOrigem, idiomasDestino);
-      } else if (servicoTraducao === 'openai') {
-        await traduzirArquivoOpenAI(arquivo, idiomaOrigem, idiomasDestino, glossario);
-      }
-      alert('Arquivo traduzido com sucesso!');
-    } catch (erro) {
-      alert('Erro ao traduzir o arquivo. Por favor, tente novamente.');
-    }
+    traduzirArquivo(arquivo, idiomaOrigem, idiomasDestino, servicoTraducao, glossario);
   };
 
   return (
@@ -57,15 +50,17 @@ function App() {
       </div>
       <div>
         <h3>Serviço de Tradução:</h3>
-        <select value={servicoTraducao} onChange={(e) => setServicoTraducao(e.target.value)}>
+        <select value={servicoTraducao} onChange={(e) => setServicoTraducao(e.target.value as TraducaoServicos)}>
           <option value="google">Google Translate</option>
           <option value="openai">OpenAI</option>
         </select>
       </div>
       <EntradaGlossario aoMudarGlossario={setGlossario} />
-      <button onClick={lidarComTraduzir} disabled={!arquivo || idiomasDestino.length === 0}>
+      <button onClick={lidarComTraduzir} disabled={!arquivo || idiomasDestino.length === 0 || carregando}>
         Traduzir
       </button>
+      {carregando && <p>Processando...</p>}
+      {erro && <p>{erro}</p>}
     </div>
   );
 }

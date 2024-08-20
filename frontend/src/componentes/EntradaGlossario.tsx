@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useGlossario } from './useGlossario';
 
-const EntradaGlossario = ({ aoMudarGlossario }) => {
-  const [entradas, setEntradas] = useState([{ termo: '', definicao: '' }]);
+interface EntradaGlossarioProps {
+  aoMudarGlossario: (glossario: Record<string, string>) => void;
+}
 
-  const adicionarEntrada = () => {
-    setEntradas([...entradas, { termo: '', definicao: '' }]);
-  };
-
-  const atualizarEntrada = (index, campo, valor) => {
-    const novasEntradas = [...entradas];
-    novasEntradas[index][campo] = valor;
-    setEntradas(novasEntradas);
-    
-    const glossario = Object.fromEntries(novasEntradas.map(e => [e.termo, e.definicao]));
-    aoMudarGlossario(glossario);
-  };
+/**
+ * Componente para entrada de termos e definições do glossário.
+ * @param {EntradaGlossarioProps} props - As propriedades do componente.
+ * @returns {JSX.Element} - O elemento JSX do componente.
+ */
+const EntradaGlossario: React.FC<EntradaGlossarioProps> = ({ aoMudarGlossario }) => {
+  const { entradas, adicionarEntrada, atualizarEntrada } = useGlossario(aoMudarGlossario);
 
   return (
     <div>
