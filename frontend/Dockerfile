@@ -1,12 +1,12 @@
-# Usar uma imagem oficial do Node.js como base
-FROM node:20.17.0
+# Usar uma imagem oficial do Node.js (versão menor) como base
+FROM node:20.17.0-alpine
 
 # Definir o diretório de trabalho
 WORKDIR /app
 
-# Instalar as dependências do projeto
+# Copiar arquivos de dependências e instalar antes de copiar o restante do código
 COPY package*.json ./
-RUN npm cache clean --force && npm install --force
+RUN npm install --force && npm cache clean --force
 
 # Copiar o código da aplicação
 COPY . .
