@@ -31,36 +31,40 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <h1>Tradutor de arquivos i18n</h1>
-      <EnvioArquivo aoSelecionarArquivo={setArquivo} />
-      <div>
-        <h3>Idioma de origem:</h3>
-        <select value={idiomaOrigem} onChange={(e) => setIdiomaOrigem(e.target.value)}>
-          <option value="pt">Português</option>
-        </select>
+    <div className="App relative flex min-h-screen flex-col justify-center overflow-hidden bg-green-500 py-6 sm:py-12">
+      <div className='relative bg-white px-10 py-10 shadow-xl'>
+
+        <h1 className="text-4xl font-bold">I18N Translator</h1>
+        <EnvioArquivo aoSelecionarArquivo={setArquivo} />
+        <div>
+          <h3>Idioma de origem:</h3>
+          <select value={idiomaOrigem} onChange={(e) => setIdiomaOrigem(e.target.value)}>
+            <option value="pt">Português</option>
+          </select>
+        </div>
+        <div>
+          <h3>Idiomas de destino:</h3>
+          <SeletorIdioma
+            idiomas={IDIOMAS}
+            idiomasSelecionados={idiomasDestino}
+            aoMudarIdioma={setIdiomasDestino}
+          />
+        </div>
+        <div>
+          <h3>Serviço de Tradução:</h3>
+          <select value={servicoTraducao} onChange={(e) => setServicoTraducao(e.target.value as TraducaoServicos)}>
+            <option value="google">Google Translate</option>
+            <option value="openai">OpenAI</option>
+          </select>
+        </div>
+        <EntradaGlossario aoMudarGlossario={setGlossario} />
+        <button onClick={lidarComTraduzir} disabled={!arquivo || idiomasDestino.length === 0 || carregando}>
+          Traduzir
+        </button>
+        {carregando && <p>Processando...</p>}
+        {erro && <p>{erro}</p>}
+
       </div>
-      <div>
-        <h3>Idiomas de destino:</h3>
-        <SeletorIdioma
-          idiomas={IDIOMAS}
-          idiomasSelecionados={idiomasDestino}
-          aoMudarIdioma={setIdiomasDestino}
-        />
-      </div>
-      <div>
-        <h3>Serviço de Tradução:</h3>
-        <select value={servicoTraducao} onChange={(e) => setServicoTraducao(e.target.value as TraducaoServicos)}>
-          <option value="google">Google Translate</option>
-          <option value="openai">OpenAI</option>
-        </select>
-      </div>
-      <EntradaGlossario aoMudarGlossario={setGlossario} />
-      <button onClick={lidarComTraduzir} disabled={!arquivo || idiomasDestino.length === 0 || carregando}>
-        Traduzir
-      </button>
-      {carregando && <p>Processando...</p>}
-      {erro && <p>{erro}</p>}
     </div>
   );
 }
