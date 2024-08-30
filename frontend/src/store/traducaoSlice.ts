@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TraducaoServico } from '../types';
 
 interface TraducaoState {
   etapaAtual: number;
   arquivo: File | null;
   idiomaOrigem: string;
   idiomasDestino: string[];
-  servicoTraducao: 'google' | 'openai';
+  servicoTraducao: TraducaoServico;
   glossario: Record<string, string>;
 }
 
 const initialState: TraducaoState = {
   etapaAtual: 0,
   arquivo: null,
-  idiomaOrigem: 'pt',
+  idiomaOrigem: '',
   idiomasDestino: [],
   servicoTraducao: 'google',
   glossario: {},
@@ -32,9 +33,10 @@ const traducaoSlice = createSlice({
       state.idiomaOrigem = action.payload;
     },
     setIdiomasDestino(state, action: PayloadAction<string[]>) {
+      console.log(action)
       state.idiomasDestino = action.payload;
     },
-    setServicoTraducao(state, action: PayloadAction<'google' | 'openai'>) {
+    setServicoTraducao(state, action: PayloadAction<TraducaoServico>) {
       state.servicoTraducao = action.payload;
     },
     setGlossario(state, action: PayloadAction<Record<string, string>>) {

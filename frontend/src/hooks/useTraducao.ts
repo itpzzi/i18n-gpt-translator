@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axiosWrapper from '../servicos/axiosWrapper'
 import { AxiosResponse } from 'axios';
 
-type TraducaoServicos = 'google' | 'openai';
+type TraducaoServico = 'google' | 'openai';
 
 /**
  * Configura os dados do formulário para envio via FormData.
@@ -47,7 +47,7 @@ const useTraducao = () => {
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
 
-  const traduzirArquivo = async (arquivo: File, idiomaOrigem: string, idiomasDestino: string[], servicoTraducao: TraducaoServicos, glossario?: Record<string, string>) => {
+  const traduzirArquivo = async (arquivo: File, idiomaOrigem: string, idiomasDestino: string[], servicoTraducao: TraducaoServico, glossario?: Record<string, string>) => {
     setCarregando(true);
     setErro(null);
     

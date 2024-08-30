@@ -9,13 +9,7 @@ import SeletorIdiomasDestino from './componentes/SeletorIdiomasDestino';
 import SeletorDeServico from './componentes/SeletorDeServico';
 import SolicitarTraducao from './componentes/SolicitarTraducao';
 
-const IDIOMAS = [
-  { codigo: 'en', nome: 'Inglês' },
-  { codigo: 'es', nome: 'Espanhol' },
-  { codigo: 'fr', nome: 'Francês' },
-  { codigo: 'de', nome: 'Alemão' },
-  { codigo: 'it', nome: 'Italiano' },
-];
+
 
 const etapas = [
   'Entry JSON',
@@ -54,13 +48,7 @@ const App: React.FC = () => {
 
         {etapaAtual === 0 && <EnvioArquivo arquivoSelecionado={arquivo} aoSelecionarArquivo={(file) => dispatch(setArquivo(file as File))} />}
         {etapaAtual === 1 && <SeletorIdiomaOrigem />}
-        {etapaAtual === 2 && (
-          <SeletorIdiomasDestino
-            idiomas={IDIOMAS}
-            idiomasSelecionados={idiomasDestino}
-            aoMudarIdioma={(idiomas) => dispatch(setIdiomasDestino(idiomas))}
-          />
-        )}
+        {etapaAtual === 2 && <SeletorIdiomasDestino />}
         {etapaAtual === 3 && <SeletorDeServico />}
         {etapaAtual === 4 && <SolicitarTraducao />}
       </div>

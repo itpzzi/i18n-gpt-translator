@@ -3,7 +3,7 @@ export interface Idioma {
     nome: string;
 }
 
-export type TraducaoServicos = 'google' | 'openai';
+export type TraducaoServico = 'google' | 'openai';
 
 export interface Glossario {
     [termo: string]: string;

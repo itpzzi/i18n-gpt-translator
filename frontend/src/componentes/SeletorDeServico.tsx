@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import EntradaGlossario from './EntradaGlossario';
 import { RootState } from '../store';
 import { setGlossario, setServicoTraducao } from '../store/traducaoSlice';
-import { TraducaoServicos } from '../types';
+import { TraducaoServico } from '../types';
 
 const SeletorDeServico = () => {
   const dispatch = useDispatch();
   const { servicoTraducao } = useSelector((state: RootState) => state.traducao);
 
-  const handleTabChange = (value: TraducaoServicos) => {
+  const handleTabChange = (value: TraducaoServico) => {
     dispatch(setServicoTraducao(value));
   };
 
@@ -19,7 +19,7 @@ const SeletorDeServico = () => {
       <span className="text-lg font-semibold mb-4 block">Selecione o serviço:</span>
       <Tabs.Root
         defaultValue={servicoTraducao}
-        onValueChange={value => handleTabChange(value as TraducaoServicos)}
+        onValueChange={value => handleTabChange(value as TraducaoServico)}
       >
         <Tabs.List className="flex border-b border-gray-200">
           <Tabs.Trigger
