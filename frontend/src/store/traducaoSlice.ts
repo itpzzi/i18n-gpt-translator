@@ -26,7 +26,7 @@ const traducaoSlice = createSlice({
     setEtapaAtual(state, action: PayloadAction<number>) {
       state.etapaAtual = action.payload;
     },
-    setArquivo(state, action: PayloadAction<File>) {
+    setArquivo(state, action: PayloadAction<File | null>) {
       state.arquivo = action.payload;
     },
     setIdiomaOrigem(state, action: PayloadAction<string>) {

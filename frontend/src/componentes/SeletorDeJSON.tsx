@@ -1,20 +1,21 @@
 import React from 'react';
 import { TrashIcon, FilePlusIcon } from '@radix-ui/react-icons'
 import { Button } from '@radix-ui/themes';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { setArquivo } from '../store/traducaoSlice';
 
-interface EnvioArquivoProps {
-  aoSelecionarArquivo: (file: File | null) => void;
-  arquivoSelecionado: File | null;
-}
+const EnvioArquivo: React.FC = () => {
+  const dispatch = useDispatch();
+  const { arquivo } = useSelector((state: RootState) => state.traducao);
 
-const EnvioArquivo: React.FC<EnvioArquivoProps> = ({ aoSelecionarArquivo, arquivoSelecionado }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    aoSelecionarArquivo(file);
+    dispatch(setArquivo(file as File))
   };
 
   const removerArquivo = () => {
-    aoSelecionarArquivo(null);
+    dispatch(setArquivo(null))
   };
 
   return (
@@ -23,10 +24,10 @@ const EnvioArquivo: React.FC<EnvioArquivoProps> = ({ aoSelecionarArquivo, arquiv
         htmlFor="arquivo-upload"
         className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-green-700 transition"
       >
-        {arquivoSelecionado ? (
+        {arquivo ? (
           <div className="flex items-center justify-center gap-4 w-full px-4">
             <span className="text-lg font-medium text-gray-700 truncate">
-              {arquivoSelecionado.name}
+              {arquivo.name}
             </span>
             <Button
               onClick={removerArquivo}

@@ -1,15 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import EnvioArquivo from './componentes/EnvioArquivo';
+import SeletorDeJSON from './componentes/SeletorDeJSON';
 import SeletorPorEtapas from './componentes/SeletorPorEtapas';
 import { RootState } from './store';
-import { setEtapaAtual, setArquivo, setIdiomasDestino } from './store/traducaoSlice';
+import { setEtapaAtual } from './store/traducaoSlice';
 import SeletorIdiomaOrigem from './componentes/SeletorIdiomaOrigem';
 import SeletorIdiomasDestino from './componentes/SeletorIdiomasDestino';
 import SeletorDeServico from './componentes/SeletorDeServico';
 import SolicitarTraducao from './componentes/SolicitarTraducao';
-
-
 
 const etapas = [
   'Entry JSON',
@@ -21,7 +19,7 @@ const etapas = [
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const { etapaAtual, arquivo, idiomasDestino } = useSelector((state: RootState) => state.traducao);
+  const { etapaAtual } = useSelector((state: RootState) => state.traducao);
 
   const proximaEtapa = () => dispatch(setEtapaAtual(Math.min(etapaAtual + 1, etapas.length - 1)));
   const etapaAnterior = () => dispatch(setEtapaAtual(Math.max(etapaAtual - 1, 0)));
@@ -46,7 +44,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {etapaAtual === 0 && <EnvioArquivo arquivoSelecionado={arquivo} aoSelecionarArquivo={(file) => dispatch(setArquivo(file as File))} />}
+        {etapaAtual === 0 && <SeletorDeJSON />}
         {etapaAtual === 1 && <SeletorIdiomaOrigem />}
         {etapaAtual === 2 && <SeletorIdiomasDestino />}
         {etapaAtual === 3 && <SeletorDeServico />}
