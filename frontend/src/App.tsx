@@ -51,26 +51,17 @@ const App: React.FC = () => {
             <p>JSON translator and keys generator</p>
           </div>
 
-          <div className='col-span-9 p-4'>
-            <SeletorPorEtapas etapaAtual={etapaAtual} etapas={etapas} />
-            <div className="mt-8">
-              <button
-                onClick={etapaAnterior}
-                className="mr-4 px-4 py-2 bg-gray-300 text-gray-700 rounded"
-              >
-                Anterior
-              </button>
-              <button
-                onClick={proximaEtapa}
-                className="px-4 py-2 bg-green-700 text-white rounded"
-              >
-                Próximo
-              </button>
-            </div>
+          <div className='flex col-span-9 p-4'>
+            <SeletorPorEtapas
+              etapaAtual={etapaAtual}
+              etapas={etapas}
+              proximaEtapa={proximaEtapa}
+              etapaAnterior={etapaAnterior}
+            />
           </div>
         </div>
 
-        {etapaAtual === 0 && <EnvioArquivo aoSelecionarArquivo={(file) => dispatch(setArquivo(file as File))} />}
+        {etapaAtual === 0 && <EnvioArquivo arquivoSelecionado={arquivo} aoSelecionarArquivo={(file) => dispatch(setArquivo(file as File))} />}
         {etapaAtual === 1 && (
           <div>
             <h3>Idioma de origem:</h3>
