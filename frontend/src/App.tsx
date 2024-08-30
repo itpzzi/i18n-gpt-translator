@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import EnvioArquivo from './componentes/EnvioArquivo';
-import SeletorIdioma from './componentes/SeletorIdioma';
 import EntradaGlossario from './componentes/EntradaGlossario';
 import useTraducao from './hooks/useTraducao';
 import SeletorPorEtapas from './componentes/SeletorPorEtapas';
 import { RootState } from './store';
 import { setEtapaAtual, setArquivo, setIdiomaOrigem, setIdiomasDestino, setServicoTraducao, setGlossario } from './store/traducaoSlice';
 import SeletorIdiomaOrigem from './componentes/SeletorIdiomaOrigem';
+import SeletorIdiomasDestino from './componentes/SeletorIdiomasDestino';
 
 const IDIOMAS = [
   { codigo: 'en', nome: 'Inglês' },
@@ -65,14 +65,11 @@ const App: React.FC = () => {
         {etapaAtual === 0 && <EnvioArquivo arquivoSelecionado={arquivo} aoSelecionarArquivo={(file) => dispatch(setArquivo(file as File))} />}
         {etapaAtual === 1 && <SeletorIdiomaOrigem />}
         {etapaAtual === 2 && (
-          <div>
-            <h3>Idiomas de destino:</h3>
-            <SeletorIdioma
-              idiomas={IDIOMAS}
-              idiomasSelecionados={idiomasDestino}
-              aoMudarIdioma={(idiomas) => dispatch(setIdiomasDestino(idiomas))}
-            />
-          </div>
+          <SeletorIdiomasDestino
+            idiomas={IDIOMAS}
+            idiomasSelecionados={idiomasDestino}
+            aoMudarIdioma={(idiomas) => dispatch(setIdiomasDestino(idiomas))}
+          />
         )}
         {etapaAtual === 3 && (
           <div>
