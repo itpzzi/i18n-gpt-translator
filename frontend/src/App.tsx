@@ -7,6 +7,7 @@ import useTraducao from './hooks/useTraducao';
 import SeletorPorEtapas from './componentes/SeletorPorEtapas';
 import { RootState } from './store';
 import { setEtapaAtual, setArquivo, setIdiomaOrigem, setIdiomasDestino, setServicoTraducao, setGlossario } from './store/traducaoSlice';
+import SeletorIdiomaOrigem from './componentes/SeletorIdiomaOrigem';
 
 const IDIOMAS = [
   { codigo: 'en', nome: 'Inglês' },
@@ -62,14 +63,7 @@ const App: React.FC = () => {
         </div>
 
         {etapaAtual === 0 && <EnvioArquivo arquivoSelecionado={arquivo} aoSelecionarArquivo={(file) => dispatch(setArquivo(file as File))} />}
-        {etapaAtual === 1 && (
-          <div>
-            <h3>Idioma de origem:</h3>
-            <select value={idiomaOrigem} onChange={(e) => dispatch(setIdiomaOrigem(e.target.value))}>
-              <option value='pt'>Português</option>
-            </select>
-          </div>
-        )}
+        {etapaAtual === 1 && <SeletorIdiomaOrigem />}
         {etapaAtual === 2 && (
           <div>
             <h3>Idiomas de destino:</h3>
