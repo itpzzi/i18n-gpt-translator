@@ -24,8 +24,8 @@ const SolicitarTraducao: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Revisão e Solicitação</h2>
+    <>
+      <h2 className="text-lg font-semibold mb-2">Revisão e Solicitação</h2>
       <div className="mb-4">
         <p><strong>Arquivo:</strong> {arquivo?.name || 'Nenhum arquivo selecionado'}</p>
         <p><strong>Idioma de Origem:</strong> {idiomaOrigem}</p>
@@ -48,7 +48,7 @@ const SolicitarTraducao: React.FC = () => {
         {carregando ? 'Gerando ZIP...' : 'Traduzir'}
       </Button>
       {erro && <p className="text-red-500 mt-4">{erro}</p>}
-    </div>
+    </>
   );
 };
 
