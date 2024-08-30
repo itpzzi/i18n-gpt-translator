@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import EnvioArquivo from './componentes/EnvioArquivo';
-import EntradaGlossario from './componentes/EntradaGlossario';
-import useTraducao from './hooks/useTraducao';
 import SeletorPorEtapas from './componentes/SeletorPorEtapas';
 import { RootState } from './store';
-import { setEtapaAtual, setArquivo, setIdiomasDestino, setServicoTraducao, setGlossario } from './store/traducaoSlice';
+import { setEtapaAtual, setArquivo, setIdiomasDestino } from './store/traducaoSlice';
 import SeletorIdiomaOrigem from './componentes/SeletorIdiomaOrigem';
 import SeletorIdiomasDestino from './componentes/SeletorIdiomasDestino';
 import SeletorDeServico from './componentes/SeletorDeServico';
+import SolicitarTraducao from './componentes/SolicitarTraducao';
 
 const IDIOMAS = [
   { codigo: 'en', nome: 'Inglês' },
@@ -28,17 +27,7 @@ const etapas = [
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const { etapaAtual, arquivo, idiomaOrigem, idiomasDestino, servicoTraducao, glossario } = useSelector((state: RootState) => state.traducao);
-  const { traduzirArquivo, carregando, erro } = useTraducao();
-
-  const lidarComTraduzir = () => {
-    if (!arquivo || idiomasDestino.length === 0) {
-      alert('Por favor, selecione um arquivo e pelo menos um idioma de destino.');
-      return;
-    }
-
-    traduzirArquivo(arquivo, idiomaOrigem, idiomasDestino, servicoTraducao, glossario);
-  };
+  const { etapaAtual, arquivo, idiomasDestino } = useSelector((state: RootState) => state.traducao);
 
   const proximaEtapa = () => dispatch(setEtapaAtual(Math.min(etapaAtual + 1, etapas.length - 1)));
   const etapaAnterior = () => dispatch(setEtapaAtual(Math.max(etapaAtual - 1, 0)));
@@ -73,15 +62,7 @@ const App: React.FC = () => {
           />
         )}
         {etapaAtual === 3 && <SeletorDeServico />}
-        {etapaAtual === 4 && (
-          <>
-            <button onClick={lidarComTraduzir} disabled={!arquivo || idiomasDestino.length === 0 || carregando}>
-              Traduzir
-            </button>
-            {carregando && <p>Processando...</p>}
-            {erro && <p>{erro}</p>}
-          </>
-        )}
+        {etapaAtual === 4 && <SolicitarTraducao />}
       </div>
     </div>
   );
