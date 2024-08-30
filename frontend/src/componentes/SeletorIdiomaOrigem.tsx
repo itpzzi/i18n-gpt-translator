@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Select from '@radix-ui/react-select';
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { setIdiomaOrigem } from '../store/traducaoSlice';

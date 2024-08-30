@@ -5,9 +5,10 @@ import EntradaGlossario from './componentes/EntradaGlossario';
 import useTraducao from './hooks/useTraducao';
 import SeletorPorEtapas from './componentes/SeletorPorEtapas';
 import { RootState } from './store';
-import { setEtapaAtual, setArquivo, setIdiomaOrigem, setIdiomasDestino, setServicoTraducao, setGlossario } from './store/traducaoSlice';
+import { setEtapaAtual, setArquivo, setIdiomasDestino, setServicoTraducao, setGlossario } from './store/traducaoSlice';
 import SeletorIdiomaOrigem from './componentes/SeletorIdiomaOrigem';
 import SeletorIdiomasDestino from './componentes/SeletorIdiomasDestino';
+import SeletorDeServico from './componentes/SeletorDeServico';
 
 const IDIOMAS = [
   { codigo: 'en', nome: 'Inglês' },
@@ -71,18 +72,9 @@ const App: React.FC = () => {
             aoMudarIdioma={(idiomas) => dispatch(setIdiomasDestino(idiomas))}
           />
         )}
-        {etapaAtual === 3 && (
-          <div>
-            <h3>Serviço de Tradução:</h3>
-            <select value={servicoTraducao} onChange={(e) => dispatch(setServicoTraducao(e.target.value as 'google' | 'openai'))}>
-              <option value='google'>Google Translate</option>
-              <option value='openai'>OpenAI</option>
-            </select>
-          </div>
-        )}
+        {etapaAtual === 3 && <SeletorDeServico />}
         {etapaAtual === 4 && (
           <>
-            <EntradaGlossario aoMudarGlossario={(glossario) => dispatch(setGlossario(glossario))} />
             <button onClick={lidarComTraduzir} disabled={!arquivo || idiomasDestino.length === 0 || carregando}>
               Traduzir
             </button>

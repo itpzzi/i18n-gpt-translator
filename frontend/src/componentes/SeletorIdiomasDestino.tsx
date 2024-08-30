@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Checkbox from '@radix-ui/react-checkbox';
-import { CheckIcon, Cross1Icon } from '@radix-ui/react-icons';
+import { CheckIcon } from '@radix-ui/react-icons';
 
 // Definindo o tipo para um idioma
 interface Idioma {
