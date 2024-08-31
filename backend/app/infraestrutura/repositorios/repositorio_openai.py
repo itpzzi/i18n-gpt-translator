@@ -41,7 +41,5 @@ class RepositorioOpenAI(RepositorioTraducao):
     ) -> str:
         prompt = f"Traduza o seguinte texto de {idioma_origem} para {idioma_destino}:\n\n{texto}\n\n"
         if glossario:
-            prompt += "Use o seguinte glossário para contexto:\n"
-            for termo, definicao in glossario.items():
-                prompt += f"- {termo}: {definicao}\n"
+            prompt += f"Use o seguinte glossário para contexto: {glossario}"
         return prompt

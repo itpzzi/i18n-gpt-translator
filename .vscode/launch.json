@@ -1,0 +1,38 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Docker Compose",
+      "type": "python",
+      "request": "launch",
+      "preLaunchTask": "docker-compose: up",
+      "program": "${workspaceFolder}/backend/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "port": 5678,
+      "host": "localhost",
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/backend",
+          "remoteRoot": "/app"
+        }
+      ]
+    },
+    {
+      "name": "Python: Remote Attach",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      },
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/backend",
+          "remoteRoot": "/app"
+        }
+      ],
+      "justMyCode": true
+    }
+  ]
+}

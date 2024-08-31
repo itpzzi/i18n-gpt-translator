@@ -26,12 +26,17 @@ async def traduzir_openai(
     arquivo: UploadFile = File(...),
     idioma_origem: str = Form(...),
     idiomas_destino: List[str] = Form(...),
-    glossario: Dict[str, str] = Form(...),
+    glossario: str = Form(...),
 ):
     if not glossario:
         raise HTTPException(
             status_code=400, detail="Glossário é necessário para o serviço OpenAI"
         )
+
+    try:
+        glossario_dict: Dict[str, str] = json.loads(glossario)
+    except json.JSONDecodeError:
+        return {"detail": "Glossário JSON inválido"}
 
     conteudo = json.loads(await arquivo.read())
 
@@ -39,7 +44,7 @@ async def traduzir_openai(
         idioma_origem=idioma_origem,
         idiomas_destino=idiomas_destino,
         conteudo=conteudo,
-        glossario=glossario,
+        glossario=glossario_dict,
     )
 
     repositorio_openai = RepositorioOpenAI(OPENAI_API_KEY)
